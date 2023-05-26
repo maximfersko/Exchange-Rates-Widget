@@ -16,7 +16,7 @@ async function fetchCurrencyRates() {
             throw new Error(data.error.info);
         }
     } catch (error) {
-        throw new Error('Ошибка при получении данных: ' + error
+        throw new Error('Error response: ' + error
             .message);
     }
 }
