@@ -51,7 +51,6 @@ function displayCurrencyRates(currencies) {
 
     currencyList.appendChild(usdListItem);
 
-    // Конвертировать евро в рубли
     const eurToRub = currencies['EURRUB'];
 
     const eurListItem = document.createElement('li');
