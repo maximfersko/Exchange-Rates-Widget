@@ -1,52 +1,72 @@
 const ACCESS_KEY = '';
-    const BASE_CURRENCY = 'USD';
-    const QUOTE_CURRENCY = 'EUR';
+const BASE_CURRENCY = 'USD';
+const QUOTE_CURRENCY = 'EUR';
 
-    async function fetchCurrencyRates() {
-      const url = `http://apilayer.net/api/live?access_key=${ACCESS_KEY}&currencies=${QUOTE_CURRENCY}&source=${BASE_CURRENCY}&format=1`;
+async function fetchCurrencyRates() {
+    const url =
+        `http://apilayer.net/api/live?access_key=${ACCESS_KEY}&currencies=${QUOTE_CURRENCY},RUB&source=${BASE_CURRENCY}&format=1`;
 
-      try {
+    try {
         const response = await fetch(url);
         const data = await response.json();
 
         if (data.success) {
-          return data.quotes;
+            return data.quotes;
         } else {
-          throw new Error(data.error.info);
+            throw new Error(data.error.info);
         }
-      } catch (error) {
-        throw new Error('Ошибка при получении данных: ' + error.message);
-      }
+    } catch (error) {
+        throw new Error('Ошибка при получении данных: ' + error
+            .message);
     }
+}
 
-    document.addEventListener('DOMContentLoaded', async function() {
-      try {
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
         const currencies = await fetchCurrencyRates();
         displayCurrencyRates(currencies);
-      } catch (error) {
+    } catch (error) {
         console.error(error);
-      }
-    });
+    }
+});
 
-    function displayCurrencyRates(currencies) {
-      const currencyList = document.getElementById('currency-list');
-      currencyList.innerHTML = '';
+function displayCurrencyRates(currencies) {
+    console.log(currencies);
+    const currencyList = document.getElementById('currency-list');
+    currencyList.innerHTML = '';
 
-      for (const currency in currencies) {
-        const listItem = document.createElement('li');
-        listItem.classList.add('currency-item');
+    const usdListItem = document.createElement('li');
+    usdListItem.classList.add('currency-item');
 
-        const currencyCode = document.createElement('span');
-        currencyCode.classList.add('currency-code');
-        currencyCode.textContent = currency.replace(BASE_CURRENCY, '');
+    const usdCode = document.createElement('span');
+    usdCode.classList.add('currency-code');
+    usdCode.textContent = 'USD:';
 
-        const currencyRate = document.createElement('span');
-        currencyRate.classList.add('currency-rate');
-        currencyRate.textContent = currencies[currency];
+    const usdRate = document.createElement('span');
+    usdRate.classList.add('currency-rate');
+    usdRate.textContent = currencies[`${BASE_CURRENCY}RUB`];
 
-        listItem.appendChild(currencyCode);
-        listItem.appendChild(currencyRate);
+    usdListItem.appendChild(usdCode);
+    usdListItem.appendChild(usdRate);
 
-        currencyList.appendChild(listItem);
-      }
-    }   
+    currencyList.appendChild(usdListItem);
+
+    // Конвертировать евро в рубли
+    const eurToRub = currencies['EURRUB'];
+
+    const eurListItem = document.createElement('li');
+    eurListItem.classList.add('currency-item');
+
+    const eurCode = document.createElement('span');
+    eurCode.classList.add('currency-code');
+    eurCode.textContent = 'EUR:';
+
+    const eurRate = document.createElement('span');
+    eurRate.classList.add('currency-rate');
+    eurRate.textContent = eurToRub;
+
+    eurListItem.appendChild(eurCode);
+    eurListItem.appendChild(eurRate);
+
+    currencyList.appendChild(eurListItem);
+}
