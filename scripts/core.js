@@ -21,7 +21,7 @@ async function fetchCurrencyRates() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async () => {
     try {
         const currencies = await fetchCurrencyRates();
         displayCurrencyRates(currencies);
@@ -44,14 +44,14 @@ function displayCurrencyRates(currencies) {
 
     const usdRate = document.createElement('span');
     usdRate.classList.add('currency-rate');
-    usdRate.textContent = currencies[`${BASE_CURRENCY}RUB`];
+    usdRate.textContent = currencies['USDRUB'].toFixed(2);
 
     usdListItem.appendChild(usdCode);
     usdListItem.appendChild(usdRate);
 
     currencyList.appendChild(usdListItem);
 
-    const eurToRub = currencies['EURRUB'];
+    const eurToRub = currencies['USDRUB'] / currencies['USDEUR'];
 
     const eurListItem = document.createElement('li');
     eurListItem.classList.add('currency-item');
@@ -62,10 +62,24 @@ function displayCurrencyRates(currencies) {
 
     const eurRate = document.createElement('span');
     eurRate.classList.add('currency-rate');
-    eurRate.textContent = eurToRub;
+    eurRate.textContent = eurToRub.toFixed(2);
 
     eurListItem.appendChild(eurCode);
     eurListItem.appendChild(eurRate);
 
     currencyList.appendChild(eurListItem);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const refreshButton = document.getElementById('refresh-button');
+    refreshButton.addEventListener('click', handleRefresh);
+});
+
+async function handleRefresh() {
+    try {
+        const currencies = await fetchCurrencyRates();
+        displayCurrencyRates(currencies);
+    } catch (error) {
+        console.error(error);
+    }
 }
