@@ -8,9 +8,5 @@
   },
   "scripts": {
     "test": "jest"
-  },
-  "dependencies": {
-    "esm": "^3.2.25",
-    "node-fetch": "^2.6.11"
   }
 }
