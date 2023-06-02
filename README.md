@@ -1,10 +1,10 @@
-# Exchange Rates
+# **Exchange Rates**
 
 ## **How to build:**
 
 ```bash
-    npm init
-    http-server
+    npm install
+    gulp
 ```
 
 ## **How to run tests:**

@@ -10,10 +10,7 @@
     "jsdom": "^22.1.0"
   },
   "scripts": {
-    "test": "jest"
-  },
-  "jest": {
-    "verbose": true
+    "test": "jest --verbose"
   },
   "dependencies": {
     "gulp-babel": "^8.0.0",
