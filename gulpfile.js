@@ -54,11 +54,11 @@ gulp.task('serve', () => {
 	gulp.watch('./src/scripts/*.js').on('change', browserSync.reload);
 });
 
-gulp.task('default', gulp.parallel('scripts', 'styles', 'html', 'test'));
 gulp.task('watch', () => {
 	gulp.watch('src/scripts/**/*.js', gulp.series('scripts', 'test'));
 	gulp.watch('src/styles/**/*.css', gulp.series('styles'));
 	gulp.watch('src/**/*.html', gulp.series('html'));
 	gulp.watch('src/**/*.test.js', gulp.series('test'));
 });
+
 gulp.task('default', gulp.series('scripts', 'styles', 'html', 'test', 'serve'));
