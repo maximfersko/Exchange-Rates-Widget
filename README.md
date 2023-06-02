@@ -1,8 +1,7 @@
 # Exchange Rates
 
 ## **How to Build:**
-<pre>
-npm init
-http-server
-</pre>
-
+```bash
+    npm init
+    http-server
+```
