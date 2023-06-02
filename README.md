@@ -6,4 +6,4 @@
     npm init
     http-server
 ```
-`npm install`
+![widget](images/widget.png)
